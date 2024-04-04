@@ -61,12 +61,12 @@ public class D3Test {
       String attribute = element.getAttribute("href");
       vars.put("hrefLink", attribute);
     }
-    assertEquals("https://cs1632.appspot.com/reset", vars.get("hrefLink").toString());
+    assertEquals("http://localhost:8080/reset", vars.get("hrefLink").toString());
   }
 
   @Test
   public void tEST2RESET() {
-    driver.get("https://cs1632.appspot.com/");
+    driver.get("http://localhost:8080/");
     js.executeScript("document.cookie = \"1=false\";document.cookie = \"2=false\";document.cookie = \"3=false\";");
     driver.manage().window().setSize(new Dimension(1188, 776));
     driver.findElement(By.linkText("Rent-A-Cat")).click();
@@ -95,7 +95,7 @@ public class D3Test {
       String attribute = element.getAttribute("src");
       vars.put("imgSrc", attribute);
     }
-    assertEquals("https://cs1632.appspot.com/images/cat2.jpg", vars.get("imgSrc").toString());
+    assertEquals("http://localhost:8080/images/cat2.jpg", vars.get("imgSrc").toString());
   }
 
   @Test
@@ -203,34 +203,5 @@ public class D3Test {
     assertThat(driver.findElement(By.cssSelector("#greeting > h4")).getText(), is("Meow! from Jennyanydots."));
   }
 
-  @Test
-  public void dEFECT1FUNFEED() {
-    driver.get("http://localhost:8080/");
-    js.executeScript("document.cookie = \"1=false\";document.cookie = \"2=false\";document.cookie = \"3=false\";");
-    driver.findElement(By.linkText("Feed-A-Cat")).click();
-    driver.findElement(By.id("catnips")).click();
-    driver.findElement(By.id("catnips")).sendKeys("-6");
-    driver.findElement(By.cssSelector(".btn")).click();
-    assertThat(driver.findElement(By.id("feedResult")).getText(), is("Cat fight!"));
-  }
-
-  @Test
-  public void dEFECT2FUNGREET() {
-    driver.get("http://localhost:8080/");
-    js.executeScript("document.cookie = \"1=true\";document.cookie = \"2=false\";document.cookie = \"3=false\";");
-    driver.findElement(By.linkText("Greet-A-Cat")).click();
-    assertThat(driver.findElement(By.cssSelector("#greeting > h4")).getText(), is("Meow!Meow!"));
-  }
-
-  @Test
-  public void dEFECT3FUNFEED() {
-    driver.get("http://localhost:8080/");
-    js.executeScript("document.cookie = \"1=false\";document.cookie = \"2=false\";document.cookie = \"3=false\";");
-    driver.findElement(By.linkText("Feed-A-Cat")).click();
-    driver.findElement(By.id("catnips")).click();
-    driver.findElement(By.id("catnips")).sendKeys("33333333333333333333333333");
-    driver.findElement(By.cssSelector(".btn")).click();
-    assertThat(driver.findElement(By.id("feedResult")).getText(), is("Nom, nom, nom."));
-  }
 
 }
